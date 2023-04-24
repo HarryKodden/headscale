@@ -23,8 +23,8 @@ jobs:
         run: |
           docker buildx create --name multiarch --driver docker-container --use
           docker buildx build --platform linux/amd64,linux/arm64 \
-            --build-arg HEADSCALE_VERSION=${{ env.HEADSCALE_VERSION }} \
-            --build-arg HEADSCALE_SHA256=${{ env.HEADSCALE_SHA256 }} \
-            --build-arg HEADSCALE_CHIPSET=${{ env.HEADSCALE_CHIPSET }} \
-            --tag ${{ secrets.DOCKERHUB_USERNAME }}/headscale:${{ env.HEADSCALE_VERSION }} \
+            --build-arg HEADSCALE_VERSION=${{ vars.HEADSCALE_VERSION }} \
+            --build-arg HEADSCALE_SHA256=${{ vars.HEADSCALE_SHA256 }} \
+            --build-arg HEADSCALE_CHIPSET=${{ vars.HEADSCALE_CHIPSET }} \
+            --tag ${{ secrets.DOCKERHUB_USERNAME }}/headscale:${{ vars.HEADSCALE_VERSION }} \
             --push .

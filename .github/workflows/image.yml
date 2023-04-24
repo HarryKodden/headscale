@@ -22,4 +22,9 @@ jobs:
       - name: Build & Push
         run: |
           docker buildx create --name multiarch --driver docker-container --use
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKERHUB_USERNAME }}/headscale:latest --push .
+          docker buildx build --platform linux/amd64,linux/arm64 \
+            --build-arg HEADSCALE_VERSION=${{ env.HEADSCALE_VERSION }} \
+            --build-arg HEADSCALE_SHA256=${{ env.HEADSCALE_SHA256 }} \
+            --build-arg HEADSCALE_CHIPSET=${{ env.HEADSCALE_CHIPSET }} \
+            --tag ${{ secrets.DOCKERHUB_USERNAME }}/headscale:${{ env.HEADSCALE_VERSION }} \
+            --push .

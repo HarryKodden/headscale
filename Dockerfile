@@ -1,10 +1,5 @@
 FROM alpine:3.17.1
 
-# Look into :
-# https://github.com/slchris/derp-server/blob/main/Dockerfile
-
-# ---
-# upgrade system and installed dependencies for security patches
 RUN --mount=type=cache,sharing=private,target=/var/cache/apk \
   set -eux; \
   apk upgrade
@@ -13,8 +8,6 @@ ARG HEADSCALE_VERSION=0.21.0
 ARG HEADSCALE_SHA256=d34e93f3cf530edfe342723d0d9d05e0cce7b17c260faf3c4065d9edd55c5ff3
 ARG HEADSCALE_CHIPSET=linux_amd64
 
-# ---
-# copy headscale
 RUN --mount=type=cache,target=/var/cache/apk \
   --mount=type=tmpfs,target=/tmp \
   set -eux; \
